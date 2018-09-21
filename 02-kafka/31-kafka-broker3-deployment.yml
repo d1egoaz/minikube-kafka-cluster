@@ -5,7 +5,7 @@ metadata:
   labels:
     app: kafka
   name: kafka-3
-  namespace: kafka
+  namespace: kafka-ca1
 spec:
   replicas: 1
   template:

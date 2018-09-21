@@ -5,7 +5,7 @@ metadata:
   labels:
     app: kafka2-service
   name: kafka2-service
-  namespace: kafka
+  namespace: kafka-ca1
 spec:
   type: NodePort
   ports:

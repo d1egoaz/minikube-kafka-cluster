@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: kafka-manager
-  namespace: kafka
+  namespace: kafka-ca1
 spec:
   type: NodePort
   selector:
