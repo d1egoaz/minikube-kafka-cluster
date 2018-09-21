@@ -1,0 +1,24 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: kafka-manager
+  namespace: kafka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-manager
+  template:
+    metadata:
+      labels:
+        app: kafka-manager
+    spec:
+      containers:
+      - name: kafka-manager
+        image: stonefury/kafkamanager-docker
+        ports:
+        - containerPort: 9000
+        env:
+        - name: ZKHOSTS
+          value: "192.168.99.100:30181" 
+
