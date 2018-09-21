@@ -15,9 +15,9 @@ spec:
     spec:
       containers:
       - name: kafka-manager
-        image: sheepkiller/kafka-manager:latest
+        image: sheepkiller/kafka-manager@sha256:615f3b99d38aba2d5fdb3fb750a5990ba9260c8fb3fd29c7e776e8c150518b78
         ports:
         - containerPort: 9000
         env:
         - name: ZK_HOSTS
-          value: "192.168.99.100:30181"
+          value: "zookeeper-service:2181"

@@ -26,7 +26,7 @@ spec:
           value: "zookeeper-service:2181"
         - name: KAFKA_CREATE_TOPICS
           value: "test-topic2:2:2"
-        image: wurstmeister/kafka
+        image: wurstmeister/kafka@sha256:2e3ff64e70ea983530f590282f36991c0a1b105350510f53cc3d1a0279b83c28
         imagePullPolicy: IfNotPresent
         name: kafka
         ports:

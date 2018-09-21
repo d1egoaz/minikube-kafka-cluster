@@ -14,7 +14,7 @@ spec:
         app: zookeeper
     spec:
       containers:
-      - image: wurstmeister/zookeeper
+      - image: wurstmeister/zookeeper@sha256:2d71f9e0cb3440d552ee31769a00eb813be87397bf535995aca0bd4eadc151fc
         imagePullPolicy: IfNotPresent
         name: zookeeper
         ports:
