@@ -17,13 +17,13 @@ spec:
       containers:
       - env:
         - name: KAFKA_ADVERTISED_HOST_NAME
-          value: "192.168.99.100"
+          value: "kafka3-service.kafka.svc.cluster.local"
         - name: KAFKA_ADVERTISED_PORT
-          value: "30093"
+          value: "9092"
         - name: KAFKA_BROKER_ID
           value: "3"
         - name: KAFKA_ZOOKEEPER_CONNECT
-          value: 192.168.99.100:30181
+          value: "zookeeper-service:2181"
         - name: KAFKA_CREATE_TOPICS
           value: "test-topic:3:3"
         image: wurstmeister/kafka

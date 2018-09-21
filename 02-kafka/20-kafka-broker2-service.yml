@@ -3,8 +3,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: kafka-service
-  name: kafka-service2
+    app: kafka2-service
+  name: kafka2-service
   namespace: kafka
 spec:
   type: NodePort
@@ -16,4 +16,3 @@ spec:
   selector:
     app: kafka
     id: "2"
-
