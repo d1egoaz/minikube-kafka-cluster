@@ -17,7 +17,7 @@ spec:
       containers:
       - env:
         - name: KAFKA_ADVERTISED_HOST_NAME
-          value: "kafka1-service.kafka.svc.cluster.local"
+          value: "kafka1-service.kafka-ca1.svc.cluster.local"
         - name: KAFKA_ADVERTISED_PORT
           value: "9092"
         - name: KAFKA_BROKER_ID

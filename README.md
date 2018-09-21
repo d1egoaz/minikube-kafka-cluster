@@ -25,6 +25,14 @@ Add new cluster, and use the following data for `Cluster Zookeeper Hosts`:
 zookeeper-service:2181
 ```
 
+## Monitor cluster resources
+
+``` bash
+watch -n 1 kubectl -n kafka-ca1 get deployments
+watch -n 1 kubectl -n kafka-ca1 get services
+watch -n 1 kubectl -n kafka-ca1 get pods
+watch -n 1 minikube service list --namespace kafka-ca1
+```
 
 ## Screenshots
 
@@ -36,3 +44,4 @@ zookeeper-service:2181
 ### Kafka manager view
 
 <img src="resources/kafka-manaker-kafka-ca1.png" width="40%">
+
