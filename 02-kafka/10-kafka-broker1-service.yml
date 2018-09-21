@@ -11,7 +11,7 @@ spec:
   ports:
   - name: kafka-port
     port: 9092
-    nodePort: 30091 # to connect from the outside world
+    # nodePort: 30091 # to connect from the outside world
     targetPort: 9092
   selector:
     app: kafka
