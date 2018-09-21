@@ -11,7 +11,7 @@ spec:
   ports:
   - name: kafka-port
     port: 9092
-    nodePort: 30093
+    # nodePort: 30093, not need to use a specific one
     targetPort: 9092
   selector:
     app: kafka

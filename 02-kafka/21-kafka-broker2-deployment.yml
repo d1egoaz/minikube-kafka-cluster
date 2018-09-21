@@ -25,7 +25,7 @@ spec:
         - name: KAFKA_ZOOKEEPER_CONNECT
           value: "zookeeper-service:2181"
         - name: KAFKA_CREATE_TOPICS
-          value: "test-topic:2:2"
+          value: "test-topic2:2:2"
         image: wurstmeister/kafka
         imagePullPolicy: IfNotPresent
         name: kafka
