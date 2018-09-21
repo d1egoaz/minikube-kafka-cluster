@@ -15,10 +15,9 @@ spec:
     spec:
       containers:
       - name: kafka-manager
-        image: stonefury/kafkamanager-docker
+        image: sheepkiller/kafka-manager:latest
         ports:
         - containerPort: 9000
         env:
-        - name: ZKHOSTS
-          value: "192.168.99.100:30181" 
-
+        - name: ZK_HOSTS
+          value: "192.168.99.100:30181"
