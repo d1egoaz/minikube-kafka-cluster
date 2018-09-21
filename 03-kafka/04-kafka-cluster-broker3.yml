@@ -1,0 +1,26 @@
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: kafka-broker3
+  namespace: kafka
+spec:
+  template:
+    metadata:
+      labels:
+        app: kafka
+        id: "3"
+    spec:
+      containers:
+      - name: kafka
+        image: "bitnami/kafka:latest"
+        ports:
+        - containerPort: 9092
+        env:
+        - name: KAFKA_ZOOKEEPER_CONNECT
+          value: "zoo1:2181"
+        - name: KAFKA_BROKER_ID
+          value: "3"
+        - name: ALLOW_PLAINTEXT_LISTENER
+          value: "yes"
+

@@ -1,0 +1,23 @@
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: zookeeper-deployment-1
+  namespace: kafka
+spec:
+  template:
+    metadata:
+      labels:
+        app: zookeeper-1
+    spec:
+      containers:
+      - name: zoo1
+        image: digitalwonderland/zookeeper
+        ports:
+        - containerPort: 2181
+        env:
+        - name: ZOOKEEPER_ID
+          value: "1"
+        - name: ZOOKEEPER_SERVER_1
+          value: zoo1
+
