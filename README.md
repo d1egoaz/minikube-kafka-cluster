@@ -10,6 +10,10 @@ kubectl apply -f 01-zookeeper/
 kubectl apply -f 02-kafka/
 kubectl apply -f 03-yahoo-kafka-manager/
 kubectl apply -f 04-kafka-monitor/
+
+# depends on creating a new cluster: kafka-ca2
+# replace in all previous files s/kafka-ca1/kafka-ca2 and run steps: 00, 01, and 02.
+kubectl apply -f 05-kafka-mirrormaker/
 ```
 
 ### Configure kafka-manager
@@ -34,6 +38,13 @@ watch -n 1 kubectl -n kafka-ca1 get statefulsets
 watch -n 1 kubectl -n kafka-ca1 get services
 watch -n 1 kubectl -n kafka-ca1 get pods
 watch -n 1 minikube service list --namespace kafka-ca1
+```
+
+## Logs
+```bash
+kubectl -n kafka-ca1 exec kafka-0 -- tail -f /opt/kafka/logs/state-change.log
+kubectl -n kafka-ca1 exec kafka-0 -- tail -f /opt/kafka/logs/server.log
+kubectl -n kafka-ca1 exec kafka-0 -- tail -f /opt/kafka/logs/controller.log
 ```
 
 ## kafka-monitoring

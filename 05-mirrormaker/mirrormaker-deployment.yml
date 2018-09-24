@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: kafka-mirrormaker
+  namespace: kafka-ca1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-mirrormaker
+  template:
+    metadata:
+      labels:
+        app: kafka-mirrormaker
+    spec:
+      containers:
+      - name: kafka-mirrormaker
+        image: martinthiele/kafka-mirrormaker@sha256:f5bf26b8dd4002093a92b957fc41fa381332ab4a0047498e732c51a9f84542f5
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: 500Mi
+        env:
+          - name: CONSUMER_ZK_CONNECT
+            value: "zookeeper-service.kafka-ca1.svc.cluster.local"
+          - name: DOWNSTREAM_BROKERS
+            value: "kafka-0.kafka.kafka-ca2.svc.cluster.local:9092,kafka-1.kafka.kafka-ca2.svc.cluster.local:9092,kafka-2.kafka.kafka-ca2.svc.cluster.local:9092"
+          - name: WHITE_LIST
+            value: "'.*'"
