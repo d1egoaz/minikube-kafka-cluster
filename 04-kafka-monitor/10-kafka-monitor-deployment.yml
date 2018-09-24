@@ -1,0 +1,32 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: kafka-monitor
+  namespace: kafka-ca1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-monitor
+  template:
+    metadata:
+      labels:
+        app: kafka-monitor
+    spec:
+      containers:
+      - name: kafka-monitor
+        image: solsson/kafka-monitor
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+          name: gui
+        - containerPort: 8778
+          name: metrics
+        resources:
+          limits:
+            cpu: 125m
+            memory: 500Mi
+          requests:
+            cpu: 125m
+        command: [ "/bin/bash", "-c", "--" ]
+        args: ["tail -f /dev/null"]
