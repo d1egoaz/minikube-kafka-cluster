@@ -15,13 +15,15 @@ spec:
     spec:
       containers:
       - name: kafka-monitor
-        image: solsson/kafka-monitor
+        image: d1egoaz/docker-kafka-monitor@sha256:aa9d1bae75f3a6f6714953a72d6c326065d6571641c9b196aaa19a3a335d332c
         imagePullPolicy: Always
         ports:
-        - containerPort: 8000
-          name: gui
-        - containerPort: 8778
-          name: metrics
+        - name: gui
+          containerPort: 8000
+        - name: metrics
+          containerPort: 8778
+        - name: jmx
+          containerPort: 9999
         resources:
           limits:
             cpu: 125m

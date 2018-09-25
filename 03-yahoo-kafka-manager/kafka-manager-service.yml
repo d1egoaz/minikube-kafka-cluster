@@ -9,6 +9,5 @@ spec:
     app: kafka-manager
   ports:
   - port: 9000
-    # nodePort: 31317
     protocol: TCP
     targetPort: 9000
