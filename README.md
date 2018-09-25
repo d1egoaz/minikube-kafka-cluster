@@ -1,5 +1,26 @@
 # kafka-cluster with minikube
 
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [kafka-cluster with minikube](#kafka-cluster-with-minikube)
+    - [Minikube configuration](#minikube-configuration)
+    - [Instructions to build the cluster](#instructions-to-build-the-cluster)
+        - [Configure kafka-manager](#configure-kafka-manager)
+    - [Monitor cluster resources](#monitor-cluster-resources)
+    - [Logs](#logs)
+    - [kafka-monitoring](#kafka-monitoring)
+        - [Monitor end-to-end a single cluster + JMX](#monitor-end-to-end-a-single-cluster--jmx)
+        - [Monitor end-to-end multi-cluster + JMX](#monitor-end-to-end-multi-cluster--jmx)
+    - [Connect to JMX metrics](#connect-to-jmx-metrics)
+    - [Screenshots](#screenshots)
+        - [Cluster view](#cluster-view)
+        - [Kafka manager view](#kafka-manager-view)
+- [Changelog](#changelog)
+
+<!-- markdown-toc end -->
+
+## Minikube configuration
 Suggested minikube start configuration:
 ```
 minikube start --memory=6144 --cpus=4
