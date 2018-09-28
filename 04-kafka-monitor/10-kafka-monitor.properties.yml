@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: kafka-monitor-volume
+  namespace: kafka-ca1
+data:
+  kafka-monitor.properties: |
+    # Copyright 2016 LinkedIn Corp. Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+    # file except in compliance with the License. You may obtain a copy of the License at
+    #
+    #    http://www.apache.org/licenses/LICENSE-2.0
+    #
+    # Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+    # an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+    {
+      "single-cluster-monitor": {
+        "class.name": "com.linkedin.kmf.apps.SingleClusterMonitor",
+        "topic": "kafka-monitor-topic-singlecluster",
+        "zookeeper.connect": "zookeeper-service.kafka-ca1.svc.cluster.local:2181",
+        "bootstrap.servers": "kafka-0.kafka.kafka-ca1.svc.cluster.local:9092,kafka-1.kafka.kafka-ca1.svc.cluster.local:9092,kafka-2.kafka.kafka-ca1.svc.cluster.local:9092",
+        "produce.record.delay.ms": 100,
+        "topic-management.topicCreationEnabled": true,
+        "topic-management.replicationFactor": 2,
+        "topic-management.partitionsToBrokersRatio": 2.0,
+        "topic-management.rebalance.interval.ms": 600000,
+        "topic-management.topicFactory.props": {},
+        "topic-management.topic.props": {
+          "retention.ms": "3600000"
+        },
+        "produce.producer.props": {
+          "client.id": "kmf-client-id",
+          "acks": "all",
+          "retries": 3,
+          "retry.backoff.ms": 1000
+        },
+
+        "consume.latency.sla.ms": "20000",
+        "consume.consumer.props": {
+            "group.id": "kafka-monitor-singlecluster-group-id"
+          }
+      },
+
+      "jetty-service": {
+        "class.name": "com.linkedin.kmf.services.JettyService",
+        "jetty.port": 8000
+      },
+
+      "jolokia-service": {
+        "class.name": "com.linkedin.kmf.services.JolokiaService"
+      },
+
+      "reporter-service": {
+        "class.name": "com.linkedin.kmf.services.DefaultMetricsReporterService",
+        "report.interval.sec": 1,
+        "report.metrics.list": [
+          "kmf:type=kafka-monitor:offline-runnable-count",
+          "kmf.services:type=produce-service,name=*:produce-availability-avg",
+          "kmf.services:type=consume-service,name=*:consume-availability-avg",
+          "kmf.services:type=produce-service,name=*:records-produced-total",
+          "kmf.services:type=consume-service,name=*:records-consumed-total",
+          "kmf.services:type=consume-service,name=*:records-lost-total",
+          "kmf.services:type=consume-service,name=*:records-duplicated-total",
+          "kmf.services:type=consume-service,name=*:records-delay-ms-avg",
+          "kmf.services:type=produce-service,name=*:records-produced-rate",
+          "kmf.services:type=produce-service,name=*:produce-error-rate",
+          "kmf.services:type=consume-service,name=*:consume-error-rate"
+        ]
+      }
+    }

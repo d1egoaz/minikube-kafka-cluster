@@ -32,3 +32,19 @@ spec:
             cpu: 125m
         command: [ "/bin/bash", "-c", "--" ]
         args: ["tail -f /dev/null"]
+        volumeMounts:
+          - name: kafka-monitor-volume
+            mountPath: /kafka-monitor-1.1.0/config/kafka-monitor.properties
+            subPath: kafka-monitor.properties
+          - name: log4j-volume
+            mountPath: /kafka-monitor-1.1.0/config/log4j.properties
+            subPath: log4j.properties
+      volumes:
+        - name: kafka-monitor-volume
+          configMap:
+            name: kafka-monitor-volume
+        - name: log4j-volume
+          configMap:
+            name: log4j-volume
+
+
