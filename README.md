@@ -89,14 +89,15 @@ cd kafka-monitor-1.1.0
 Run the following:
 ```bash
 KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.rmi.port=9999 -Djava.rmi.server.hostname=127.0.0.1 " \
-  ./bin/end-to-end-test.sh --broker-list kafka-0.kafka.kafka-ca1.svc.cluster.local:9092,kafka-1.kafka.kafka-ca1.svc.cluster.local:9092,kafka-2.kafka.kafka-ca1.svc.cluster.local:9092 --zookeeper zookeeper-service.kafka-ca1.svc.cluster.local:2181
+  exec ./bin/end-to-end-test.sh --broker-list kafka-0.kafka.kafka-ca1.svc.cluster.local:9092,kafka-1.kafka.kafka-ca1.svc.cluster.local:9092,kafka-2.kafka.kafka-ca1.svc.cluster.local:9092 --zookeeper zookeeper-service.kafka-ca1.svc.cluster.local:2181 \
+  --topic testtopic
 ```
 
 ### Monitor a single cluster + JMX using more detailed configuration kafka-monitor.properties
 
 ```bash
 KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.rmi.port=9999 -Djava.rmi.server.hostname=127.0.0.1 " \
-  ./bin/kafka-monitor-start.sh config/kafka-monitor.properties
+  exec ./bin/kafka-monitor-start.sh config/kafka-monitor.properties
 ```
 
 
@@ -105,7 +106,7 @@ KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.au
 Run the following command:
 ```bash
 KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.rmi.port=9999 -Djava.rmi.server.hostname=127.0.0.1 " \
-  ./bin/kafka-monitor-start.sh config/multi-cluster-monitor.properties
+  exec ./bin/kafka-monitor-start.sh config/multi-cluster-monitor.properties
 ```
 
 ## Connect to JMX metrics

@@ -8,22 +8,18 @@ spec:
   selector:
     matchLabels:
       app: kafka-monitor
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
         app: kafka-monitor
     spec:
+      automountServiceAccountToken: false
       containers:
       - name: kafka-monitor
-        image: d1egoaz/docker-kafka-monitor@sha256:aa9d1bae75f3a6f6714953a72d6c326065d6571641c9b196aaa19a3a335d332c
+        image: d1egoaz/docker-kafka-monitor@sha256:26ec3eed294c007a6d285f95550960ee55b1358c7432b574e4fd91ab3c6676d1
         imagePullPolicy: Always
-        ports:
-        - name: gui
-          containerPort: 8000
-        - name: metrics
-          containerPort: 8778
-        - name: jmx
-          containerPort: 9999
         resources:
           limits:
             cpu: 125m
@@ -34,10 +30,10 @@ spec:
         args: ["tail -f /dev/null"]
         volumeMounts:
           - name: kafka-monitor-volume
-            mountPath: /kafka-monitor-1.1.0/config/kafka-monitor.properties
+            mountPath: /opt/kafka-monitor/config/kafka-monitor.properties
             subPath: kafka-monitor.properties
           - name: log4j-volume
-            mountPath: /kafka-monitor-1.1.0/config/log4j.properties
+            mountPath: /opt/kafka-monitor/config/log4j.properties
             subPath: log4j.properties
       volumes:
         - name: kafka-monitor-volume
@@ -46,5 +42,3 @@ spec:
         - name: log4j-volume
           configMap:
             name: log4j-volume
-
-
