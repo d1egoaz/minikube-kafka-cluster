@@ -1,3 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-monitor
+  annotations:
+  labels:
+    app: kafka-monitor
+spec:
+  ports:
+  - protocol: TCP
+    port: 9999
+    targetPort: 9999
+  selector:
+    app: kafka-monitor
+---
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
@@ -18,27 +34,18 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: kafka-monitor
-        image: d1egoaz/docker-kafka-monitor@sha256:26ec3eed294c007a6d285f95550960ee55b1358c7432b574e4fd91ab3c6676d1
+        image: d1egoaz/docker-kafka-monitor@sha256:307e59f9db70a34ab659a5714010a805440b65d1b948cb79f6564a4567ca0f2c
         imagePullPolicy: Always
         resources:
           limits:
-            cpu: 125m
+            cpu: 256m
             memory: 500Mi
           requests:
-            cpu: 125m
-        command: [ "/bin/bash", "-c", "--" ]
-        args: ["tail -f /dev/null"]
+            cpu: 256m
         volumeMounts:
           - name: kafka-monitor-volume
-            mountPath: /opt/kafka-monitor/config/kafka-monitor.properties
-            subPath: kafka-monitor.properties
-          - name: log4j-volume
-            mountPath: /opt/kafka-monitor/config/log4j.properties
-            subPath: log4j.properties
+            mountPath: /opt/kafka-monitor/config/
       volumes:
         - name: kafka-monitor-volume
           configMap:
             name: kafka-monitor-volume
-        - name: log4j-volume
-          configMap:
-            name: log4j-volume

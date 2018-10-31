@@ -5,7 +5,7 @@ metadata:
   name: kafka-mirrormaker
   namespace: kafka-ca1
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: kafka-mirrormaker
